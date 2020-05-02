@@ -72,4 +72,4 @@ def find_synonym(argv=None):
 
 
 if __name__ == "__main__":
-    find_synonym(sys.argv)
+    sys.exit(find_synonym(sys.argv))
