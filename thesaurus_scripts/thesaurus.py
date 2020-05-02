@@ -2,7 +2,11 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
 from urllib.error import HTTPError
 from spellchecker import SpellChecker
-import sys
+import argparse
+
+parser = argparse.ArgumentParser(description='find synonyms for a word or phrase')
+parser.add_argument('string', type=str, help='Enter word or words', nargs='*')
+args = parser.parse_args()
 
 
 def spell_check(string):
@@ -51,8 +55,11 @@ def find_synonym(argv):
         for result in results:
             print(result.text)
     except HTTPError:
-        print("Page not found")
+        if len(stripped_string.split()) > 1:
+            print("Phrase not found! Please try a different phrase.")
+        else:
+            print("Word not found! Please try a different word.")
 
 
 if __name__ == "__main__":
-    find_synonym(' '.join(sys.argv[1:]))
+    find_synonym(' '.join(args.string))
