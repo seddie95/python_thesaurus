@@ -32,9 +32,9 @@ def spell_check(string):
 
 def find_synonym(argv=None):
     """ Function to find synonyms for a string"""
+    string = None
     if argv is None:
         argv = sys.argv
-
     try:
         parser = create_parser()
         args = parser.parse_args(argv[1:])
@@ -49,7 +49,7 @@ def find_synonym(argv=None):
 
         # Set the url using the amended string
         my_url = f'https://thesaurus.plus/thesaurus/{fixed_string}'
-        # Open and read the HTML
+        # Open and read the HTMLz
         uClient = uReq(my_url)
         page_html = uClient.read()
         uClient.close()
@@ -64,7 +64,10 @@ def find_synonym(argv=None):
             print(result.text)
 
     except HTTPError:
-        if len(argv) > 2:
+        if stripped_string == "what is love":
+            print("baby \ndon't \nhurt \nme")
+
+        elif len(argv) > 2:
             print("Phrase not found! Please try a different phrase.")
 
         else:
@@ -72,4 +75,4 @@ def find_synonym(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(find_synonym(sys.argv))
+    find_synonym()
