@@ -30,11 +30,10 @@ def spell_check(string):
     return corrected_string
 
 
-def find_synonym(argv=None):
+def find_synonym():
     """ Function to find synonyms for a string"""
-    string = None
-    if argv is None:
-        argv = sys.argv
+    # Take in arguments from command line
+    argv = sys.argv
     try:
         parser = create_parser()
         args = parser.parse_args(argv[1:])
