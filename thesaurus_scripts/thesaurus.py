@@ -3,10 +3,8 @@ from urllib.request import urlopen as uReq
 from urllib.error import HTTPError
 from spellchecker import SpellChecker
 import argparse
-import sys
 
 
-# set up parser parameters
 def create_parser():
     """Function to parse the user entered arguments"""
     parser = argparse.ArgumentParser(description='find synonyms for a word or phrase')
@@ -32,14 +30,18 @@ def spell_check(string):
 
 def find_synonym():
     """ Function to find synonyms for a string"""
+
+    word_count = 0
     # Take in arguments from command line
-    argv = sys.argv
     try:
         parser = create_parser()
-        args = parser.parse_args(argv[1:])
+        args = parser.parse_args()
 
-        #  If word not spelled correctly get best guess of correct spelling
+        # If word not spelled correctly get best guess of correct spelling
         correct_spelling = spell_check(args.string)
+
+        # update word count
+        word_count = len(correct_spelling)
 
         # Remove whitespace before and after word and use underscore between words
         stripped_string = correct_spelling.strip()
@@ -63,7 +65,7 @@ def find_synonym():
             print(result.text)
 
     except HTTPError:
-        if len(argv) > 2:
+        if word_count > 1:
             print("Phrase not found! Please try a different phrase.")
 
         else:
