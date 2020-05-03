@@ -63,10 +63,7 @@ def find_synonym():
             print(result.text)
 
     except HTTPError:
-        if stripped_string == "what is love":
-            print("baby \ndon't \nhurt \nme")
-
-        elif len(argv) > 2:
+        if len(argv) > 2:
             print("Phrase not found! Please try a different phrase.")
 
         else:
