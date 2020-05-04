@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup as soup
-from urllib.request import urlopen as uReq
+from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from spellchecker import SpellChecker
 import argparse
@@ -50,10 +50,10 @@ def find_synonym():
 
         # Set the url using the amended string
         my_url = f'https://thesaurus.plus/thesaurus/{fixed_string}'
-        # Open and read the HTMLz
-        uClient = uReq(my_url)
-        page_html = uClient.read()
-        uClient.close()
+        
+        # Open and read the HTML 
+        req = Request(my_url, headers={'User-Agent': 'Mozilla/5.0'})
+        page_html = urlopen(req).read()
 
         # Parse the html into text
         page_soup = soup(page_html, "html.parser")
